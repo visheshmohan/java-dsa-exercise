@@ -12,33 +12,66 @@ import java.util.concurrent.*;
 import java.util.regex.*;
 */
 
-class Result {
 
-    /*
-     * Complete the 'chocolateGame' function below.
-     *
-     * The function is expected to return an INTEGER.
-     * The function accepts INTEGER_ARRAY arr as parameter.
-     */
-
-    public static int chocolateGame(List<Integer> arr) {
-    // Write your code here
-    int winCount = 0;
-    List<List<Integer>> subsequences = formSubsequence(arr);
-    
-    for(List<Integer> sequence : subsequences)
+public class HRChoclateGame {
+    public static void main(String[] args) throws IOException 
     {
-        int choclatesInSequence = 0;
-        for(int index=0;index < sequence.size(); index++)
-        {
-            choclatesInSequence += sequence.get(index);
+        /*
+    	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int arrCount = Integer.parseInt(bufferedReader.readLine().trim());
+
+        String[] arrTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+        */
+
+        List<Integer> arr = new ArrayList<Integer>();
+
+        /*
+        for (int i = 0; i < arrCount; i++) {
+            int arrItem = Integer.parseInt(arrTemp[i]);
+            arr.add(arrItem);
         }
-            winCount += laurelWins(choclatesInSequence)?1:0;
-    }
-    return winCount;
+        */
+        
+       //arr = [1,1,2,2,3];
+        arr.clear();
+        arr.add(1);arr.add(1);
+        arr.add(2);arr.add(2);
+        arr.add(3);
+
+        int result = chocolateGame(arr);
+        
+        System.out.println(result);
+
+		/*
+		 * bufferedWriter.write(String.valueOf(result)); bufferedWriter.newLine();
+		 * 
+		 * bufferedReader.close(); bufferedWriter.close();
+		 */
     }
     
-    private static boolean laurelWins(int choclates){
+    public static int chocolateGame(List<Integer> arr) 
+    {
+	    // Write your code here
+	    int winCount = 0;
+	    List<List<Integer>> subsequences = formSubsequence(arr);
+	    
+	    for(List<Integer> sequence : subsequences)
+	    {
+	        int choclatesInSequence = 0;
+	        for(int index=0;index < sequence.size(); index++)
+	        {
+	            choclatesInSequence += sequence.get(index);
+	        }
+	            winCount += laurelWins(choclatesInSequence)?1:0;
+	    }
+	    return winCount;
+    }
+    
+    
+    private static boolean laurelWins(int choclates)
+    {
         boolean wins = false;
         if(choclates%2 != 0)
         {
@@ -47,7 +80,8 @@ class Result {
         return wins;
     }
     
-    private static List<List<Integer>> formSubsequence(List<Integer> arr){
+    private static List<List<Integer>> formSubsequence(List<Integer> arr)
+    {
         List<List<Integer>> subseqList = new ArrayList<List<Integer>>();
         final int totalPiles = arr.size();
         for(int index =0 ; index < totalPiles-1 ;index++)
@@ -76,45 +110,6 @@ class Result {
         }
         System.out.println(subseqList);
         return subseqList;
-    }
-
-}
-
-public class HRChoclateGame {
-    public static void main(String[] args) throws IOException {
-        /*
-    	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
-
-        int arrCount = Integer.parseInt(bufferedReader.readLine().trim());
-
-        String[] arrTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
-        */
-
-        List<Integer> arr = new ArrayList<Integer>();
-
-        /*
-        for (int i = 0; i < arrCount; i++) {
-            int arrItem = Integer.parseInt(arrTemp[i]);
-            arr.add(arrItem);
-        }
-        */
-        
-       //arr = [1,1,2,2,3];
-        arr.clear();
-        arr.add(1);arr.add(1);
-        arr.add(2);arr.add(2);
-        arr.add(3);
-
-        int result = Result.chocolateGame(arr);
-        
-        System.out.println(result);
-
-		/*
-		 * bufferedWriter.write(String.valueOf(result)); bufferedWriter.newLine();
-		 * 
-		 * bufferedReader.close(); bufferedWriter.close();
-		 */
     }
 }
 
